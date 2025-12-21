@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
     res.send({ status: 'ok', service: 'WhatsApp Booking Assistant - Frozen Storage Edition' });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
