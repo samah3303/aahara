@@ -1,6 +1,6 @@
 {
   "name": "frozen-box-assistant",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "WhatsApp Booking Assistant for Frozen Food Storage",
   "main": "server.js",
   "scripts": {
