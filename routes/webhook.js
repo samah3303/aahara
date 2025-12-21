@@ -10,7 +10,11 @@ const sessions = new Map();
 router.post('/', async (req, res) => {
     // 1. WhatsApp Validation
     if (req.method === 'GET' && req.query['hub.mode'] === 'subscribe') {
-         return res.send(req.query['hub.challenge']);
+        const verifyToken = process.env.VERIFY_TOKEN;
+        if (req.query['hub.verify_token'] === verifyToken) {
+             return res.send(req.query['hub.challenge']);
+        }
+        return res.sendStatus(403);
     }
 
     try {
