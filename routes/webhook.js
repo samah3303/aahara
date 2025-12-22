@@ -7,15 +7,21 @@ const { get, all, run } = require('../config/database');
 // Key: UserPhoneNumber, Value: { state: 'IDLE', center_id: 1, service_id: null, ... }
 const sessions = new Map();
 
-router.post('/', async (req, res) => {
-    // 1. WhatsApp Validation
-    if (req.method === 'GET' && req.query['hub.mode'] === 'subscribe') {
+// 1. WhatsApp Validation (GET)
+router.get('/', (req, res) => {
+    if (req.query['hub.mode'] === 'subscribe') {
         const verifyToken = process.env.VERIFY_TOKEN;
         if (req.query['hub.verify_token'] === verifyToken) {
+             console.log("Webhook Verified!");
              return res.send(req.query['hub.challenge']);
         }
         return res.sendStatus(403);
     }
+    res.send("Webhook is listening (POST required for messages).");
+});
+
+// 2. Message Handling (POST)
+router.post('/', async (req, res) => {
 
     try {
         const entry = req.body.entry?.[0];
