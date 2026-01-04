@@ -29,7 +29,7 @@ async function sendMessage(to, body) {
 }
 
 // 1. WhatsApp Validation (GET)
-router.get('/', (req, res) => {
+router.get('/', (req, res) => { 
     if (req.query['hub.mode'] === 'subscribe') {
         const verifyToken = process.env.VERIFY_TOKEN;
         if (req.query['hub.verify_token'] === verifyToken) {
